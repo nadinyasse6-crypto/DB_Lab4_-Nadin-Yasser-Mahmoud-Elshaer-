@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Most Borrowed Items</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light p-4">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Most Borrowed Items & Statistics</h2>
+            <a href="/library" class="btn btn-secondary">Back to Library</a>
+        </div>
+
+        <h4 class="mb-3">Top Borrowed Books</h4>
+        <table class="table table-bordered table-striped bg-white mb-5">
+            <thead class="table-dark">
+                <tr>
+                    <th>Book Title</th>
+                    <th>Loan Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in top_books %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.loan_count }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="2" class="text-center">No loan records available yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h4 class="mb-3">Most Active Member</h4>
+        <div class="card shadow p-4 bg-white">
+            {% if active_member %}
+                <h5 class="mb-2">{{ active_member.name }}</h5>
+                <p class="text-muted mb-0">Total Loans: {{ active_member.total_loans }}</p>
+            {% else %}
+                <p class="text-muted mb-0">No active members found yet.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

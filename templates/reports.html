@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Library Reports & Statistics</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light p-4">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Library Reports & Statistics</h2>
+            <a href="/library" class="btn btn-secondary">Back to Library</a>
+        </div>
+
+        <div class="row text-white mb-4">
+            <div class="col-md-4">
+                <div class="p-3 bg-primary rounded">
+                    <h5>Total Price</h5>
+                    <h3>{{ price_stats.total_price if price_stats and price_stats.total_price else 0 }}</h3>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 bg-success rounded">
+                    <h5>Minimum Price</h5>
+                    <h3>{{ price_stats.min_price if price_stats and price_stats.min_price else 0 }}</h3>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 bg-danger rounded">
+                    <h5>Maximum Price</h5>
+                    <h3>{{ price_stats.max_price if price_stats and price_stats.max_price else 0 }}</h3>
+                </div>
+            </div>
+        </div>
+
+        <h4 class="mb-3">Category Statistics</h4>
+        <table class="table table-bordered table-striped bg-white mb-5">
+            <thead class="table-dark">
+                <tr>
+                    <th>Category Name</th>
+                    <th>Book Count</th>
+                    <th>Average Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cat in cat_stats %}
+                <tr>
+                    <td>{{ cat.category_name }}</td>
+                    <td>{{ cat.book_count }}</td>
+                    <td>{{ "%.2f"|format(cat.avg_price) if cat.avg_price else 0.00 }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="3" class="text-center">No category statistics available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h4 class="mb-3">Prolific Authors (2+ Books)</h4>
+        <table class="table table-bordered table-striped bg-white">
+            <thead class="table-dark">
+                <tr>
+                    <th>Author Name</th>
+                    <th>Book Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for author in pro_authors %}
+                <tr>
+                    <td>{{ author.name }}</td>
+                    <td>{{ author.book_count }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="2" class="text-center">No authors with 2 or more books.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

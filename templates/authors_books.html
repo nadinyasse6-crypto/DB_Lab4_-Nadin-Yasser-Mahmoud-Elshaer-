@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Authors and Books Statistics</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light p-4">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Authors and Books Statistics</h2>
+            <a href="/library" class="btn btn-secondary">Back to Library</a>
+        </div>
+
+        <h4 class="mb-3">Author Book Counts</h4>
+        <table class="table table-bordered table-striped bg-white mb-5">
+            <thead class="table-dark">
+                <tr>
+                    <th>Author Name</th>
+                    <th>Book Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in author_counts %}
+                <tr>
+                    <td>{{ item.author_name }}</td>
+                    <td>{{ item.book_count }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="2" class="text-center">No author data available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h4 class="mb-3">Books Matching Author and Publisher Country</h4>
+        <table class="table table-bordered table-striped bg-white">
+            <thead class="table-dark">
+                <tr>
+                    <th>Book Title</th>
+                    <th>Author Name</th>
+                    <th>Publisher Name</th>
+                    <th>Country</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in matching_books %}
+                <tr>
+                    <td>{{ book.book_title }}</td>
+                    <td>{{ book.author_name }}</td>
+                    <td>{{ book.publisher_name }}</td>
+                    <td>{{ book.country }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4" class="text-center">No matching records found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
